@@ -19,23 +19,21 @@ The architecture is based on the Vision Transformer (ViT) model, where input ima
 
 Residual connections facilitate gradient flow, and the output is classified via an adjustable MLP Head.
 
-<img src="images/model.png">
+<img src="images/model.png" width=75%>
 
 ### Implementation
 
 The model interface is implemented using PyTorch classes. The classes such as `Attention` (for multi-head attention) and `TransformerEncoderBlock` are implemented according to the formulas in the referenced paper. Some implementation details, not covered in the paper, were inspired by the [official implementation](https://github.com/google-research/vision_transformer/blob/master/vit_jax/models.py) from the authors, including how positional embeddings are initialized.
 
-The script for training is available in a notebook and easily reproducible. The logs for training and validation losses and metrics are avaliable to review [here](https://app.neptune.ai/calistro/vit/experiments?viewId=standard-view).
+The training script is available in a notebook and is easily reproducible. The logs for training and validation losses, as well as metrics, are available for review [here](https://app.neptune.ai/calistro/vit/experiments?viewId=standard-view).
 
 ### Training and Experiments
 
-[//]: # (The original model was trained on the extensive JFT-300M dataset using thousands of TPUv3-core days. Due to resource limitations, model parameters and dataset size were adjusted accordingly for this implementation.)
-
-The original model was trained on a massive private JFT-300M dataset, which took thousands of TPUv3-core days to process. Due to resource limitations, model parameters and dataset size were adjusted accordingly for this implementation.
+The original model was trained on the extensive private JFT-300M dataset, which took thousands of TPUv3-core days to process. Due to resource limitations, model parameters and dataset size were adjusted accordingly for this implementation.
 
 In the paper, the authors compare several variants of ViT with different configurations: ViT-Base, ViT-Large, and ViT-Huge.
 
-<img src="images/params.png">
+<img src="images/params.png" width=75%>
 
 Experiments utilized the ViT-Base model with reduced parameters (Layers, Hidden size, MLP size, Heads) by 2/3, training from scratch on the `TinyImageNet` dataset, which comprises 200 classes with 500 images of size 64x64 pixels each.
 
